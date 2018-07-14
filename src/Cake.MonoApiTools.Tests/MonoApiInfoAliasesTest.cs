@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Cake.MonoApiTools.Tests
 {
-    public class MonoApiToolsAliasesTest
+    public class MonoApiInfoAliasesTest
     {
         [Theory]
         [InlineData("/bin/tools/mono-api-info.exe", "/bin/tools/mono-api-info.exe")]

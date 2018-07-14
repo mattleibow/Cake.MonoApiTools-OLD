@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\externals\tools\**\*" PackagePath="tools" Pack="true" />
+    <None Include="..\..\externals\tools\**\*" PackagePath="tools" Pack="true" Visible="false" />
   </ItemGroup>
 
   <ItemGroup>

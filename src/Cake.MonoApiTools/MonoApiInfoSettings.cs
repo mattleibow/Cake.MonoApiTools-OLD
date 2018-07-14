@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Cake.Core.IO;
+﻿using Cake.Core.IO;
 using Cake.Core.Tooling;
 
 namespace Cake.MonoApiTools
