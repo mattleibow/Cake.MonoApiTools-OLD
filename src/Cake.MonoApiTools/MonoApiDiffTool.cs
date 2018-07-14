@@ -40,31 +40,7 @@ namespace Cake.MonoApiTools
 
             settings = settings ?? new MonoApiDiffSettings();
 
-            var processSettings = new ProcessSettings
-            {
-                Arguments = GetArguments(firstInfo, secondInfo, outputPath, settings),
-                RedirectStandardOutput = true
-            };
-
-            Run(settings, null, processSettings, process =>
-            {
-                var contents = process.GetStandardOutput() ?? new string[0];
-
-                var file = fileSystem.GetFile(outputPath.MakeAbsolute(environment));
-                var dir = fileSystem.GetDirectory(file.Path.GetDirectory());
-
-                if (!dir.Exists)
-                    dir.Create();
-
-                using (var stream = file.OpenWrite())
-                using (var writer = new StreamWriter(stream))
-                {
-                    foreach (var line in contents)
-                    {
-                        writer.WriteLine(line);
-                    }
-                }
-            });
+            Run(settings, GetArguments(firstInfo, secondInfo, outputPath, settings));
         }
 
         private ProcessArgumentBuilder GetArguments(FilePath firstInfo, FilePath secondInfo, FilePath outputPath, MonoApiDiffSettings settings)
@@ -74,6 +50,8 @@ namespace Cake.MonoApiTools
             builder.AppendQuoted(firstInfo.MakeAbsolute(environment).FullPath);
 
             builder.AppendQuoted(secondInfo.MakeAbsolute(environment).FullPath);
+
+            builder.AppendQuoted(outputPath.MakeAbsolute(environment).FullPath);
 
             return builder;
         }

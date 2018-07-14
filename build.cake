@@ -9,7 +9,7 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var version = "0.0.0.1-preview5";
+var version = "0.0.0.1-preview6";
 
 //////////////////////////////////////////////////////////////////////
 // TASKS

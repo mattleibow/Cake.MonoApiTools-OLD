@@ -83,7 +83,8 @@ namespace Cake.MonoApiTools.Tests
             // Then
             var args =
                 "\"/Working/version-one.dll\" " +
-                "\"/Working/version-two.dll\"";
+                "\"/Working/version-two.dll\" " +
+                "\"/Working/diff.xml\"";
             Assert.Equal(args, result.Args);
         }
     }
