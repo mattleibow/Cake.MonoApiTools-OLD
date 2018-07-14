@@ -14,7 +14,5 @@ namespace Cake.MonoApiTools
         public DirectoryPath[] SearchPaths { get; set; }
 
         public FilePath[] ResolvePaths { get; set; }
-
-        public FilePath OutputPath { get; set; }
     }
 }

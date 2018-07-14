@@ -23,10 +23,7 @@ namespace Cake.MonoApiTools.Tests
         {
             var tool = new MonoApiDiffTool(FileSystem, Environment, ProcessRunner, Tools);
 
-            if (OutputPath != null)
-                Settings.OutputPath = OutputPath;
-
-            tool.Execute(FirstAssembly, SecondAssembly, Settings);
+            tool.Execute(FirstAssembly, SecondAssembly, OutputPath, Settings);
         }
     }
 }

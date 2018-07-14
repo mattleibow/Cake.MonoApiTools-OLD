@@ -20,10 +20,7 @@ namespace Cake.MonoApiTools.Tests
         {
             var tool = new MonoApiInfoTool(FileSystem, Environment, ProcessRunner, Tools);
 
-            if (OutputPath != null)
-                Settings.OutputPath = OutputPath;
-
-            tool.Execute(AssemblyPaths, Settings);
+            tool.Execute(AssemblyPaths, OutputPath, Settings);
         }
     }
 }

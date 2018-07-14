@@ -61,20 +61,14 @@ namespace Cake.MonoApiTools.Tests
 
         [Fact]
 
-        public void Should_Create_Correct_Command_Line_Arguments_When_Only_Assembly_Paths()
+        public void Should_Throw_When_Only_Assembly_Paths()
         {
             // Given
             var fixture = new MonoApiDiffFixture();
             fixture.OutputPath = null;
 
-            // When
-            var result = fixture.Run();
-
-            // Then
-            var args =
-                "\"/Working/version-one.dll\" " +
-                "\"/Working/version-two.dll\"";
-            Assert.Equal(args, result.Args);
+            // When + Then
+            var result = Assert.Throws<ArgumentNullException>("outputPath", () => fixture.Run());
         }
 
         [Fact]

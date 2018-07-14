@@ -26,19 +26,21 @@ namespace Cake.MonoApiTools
             return "mono-api-info";
         }
 
-        public void Execute(FilePath[] assemblies, MonoApiInfoSettings settings)
+        public void Execute(FilePath[] assemblies, FilePath outputPath, MonoApiInfoSettings settings)
         {
             if (assemblies == null)
                 throw new ArgumentNullException(nameof(assemblies));
             if (assemblies.Length == 0)
                 throw new ArgumentException("At least one assembly must be provided.", nameof(assemblies));
+            if (outputPath == null)
+                throw new ArgumentNullException(nameof(outputPath));
 
             settings = settings ?? new MonoApiInfoSettings();
 
-            Run(settings, GetArguments(assemblies, settings));
+            Run(settings, GetArguments(assemblies, outputPath, settings));
         }
 
-        private ProcessArgumentBuilder GetArguments(FilePath[] assemblies, MonoApiInfoSettings settings)
+        private ProcessArgumentBuilder GetArguments(FilePath[] assemblies, FilePath outputPath, MonoApiInfoSettings settings)
         {
             var builder = new ProcessArgumentBuilder();
 
@@ -64,8 +66,8 @@ namespace Cake.MonoApiTools
                 }
             }
 
-            if (settings.OutputPath != null)
-                builder.AppendSwitchQuoted("-o", "=", settings.OutputPath.MakeAbsolute(environment).FullPath);
+            if (outputPath != null)
+                builder.AppendSwitchQuoted("-o", "=", outputPath.MakeAbsolute(environment).FullPath);
 
             if (settings.GenerateContractApi)
                 builder.Append("--contract-api");

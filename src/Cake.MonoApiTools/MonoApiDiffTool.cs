@@ -29,46 +29,45 @@ namespace Cake.MonoApiTools
             return "mono-api-diff";
         }
 
-        public void Execute(FilePath firstAssembly, FilePath secondAssembly, MonoApiDiffSettings settings)
+        public void Execute(FilePath firstAssembly, FilePath secondAssembly, FilePath outputPath, MonoApiDiffSettings settings)
         {
             if (firstAssembly == null)
                 throw new ArgumentNullException(nameof(firstAssembly));
             if (secondAssembly == null)
                 throw new ArgumentNullException(nameof(secondAssembly));
+            if (outputPath == null)
+                throw new ArgumentNullException(nameof(outputPath));
 
             settings = settings ?? new MonoApiDiffSettings();
 
             var processSettings = new ProcessSettings
             {
-                Arguments = GetArguments(firstAssembly, secondAssembly, settings),
+                Arguments = GetArguments(firstAssembly, secondAssembly, outputPath, settings),
                 RedirectStandardOutput = true
             };
 
             Run(settings, null, processSettings, process =>
             {
-                if (settings.OutputPath != null)
+                var contents = process.GetStandardOutput() ?? new string[0];
+
+                var file = fileSystem.GetFile(outputPath);
+                var dir = fileSystem.GetDirectory(file.Path.GetDirectory());
+
+                if (!dir.Exists)
+                    dir.Create();
+
+                using (var stream = file.OpenWrite())
+                using (var writer = new StreamWriter(stream))
                 {
-                    var contents = process.GetStandardOutput() ?? new string[0];
-
-                    var file = fileSystem.GetFile(settings.OutputPath);
-                    var dir = fileSystem.GetDirectory(file.Path.GetDirectory());
-
-                    if (!dir.Exists)
-                        dir.Create();
-
-                    using (var stream = file.OpenWrite())
-                    using (var writer = new StreamWriter(stream))
+                    foreach (var line in contents)
                     {
-                        foreach (var line in contents)
-                        {
-                            writer.WriteLine(line);
-                        }
+                        writer.WriteLine(line);
                     }
                 }
             });
         }
 
-        private ProcessArgumentBuilder GetArguments(FilePath firstAssembly, FilePath secondAssembly, MonoApiDiffSettings settings)
+        private ProcessArgumentBuilder GetArguments(FilePath firstAssembly, FilePath secondAssembly, FilePath outputPath, MonoApiDiffSettings settings)
         {
             var builder = new ProcessArgumentBuilder();
 
