@@ -50,7 +50,7 @@ namespace Cake.MonoApiTools
             {
                 var contents = process.GetStandardOutput() ?? new string[0];
 
-                var file = fileSystem.GetFile(outputPath);
+                var file = fileSystem.GetFile(outputPath.MakeAbsolute(environment));
                 var dir = fileSystem.GetDirectory(file.Path.GetDirectory());
 
                 if (!dir.Exists)
