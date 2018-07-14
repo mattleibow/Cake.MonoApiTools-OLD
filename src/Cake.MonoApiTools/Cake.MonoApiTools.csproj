@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Cake.MonoApiTools</PackageId>
+    <Title>Cake.MonoApiTools</Title>
+    <Description>Cake Build addin to provide aliases for using the Mono API Tools (info, diff, HTML diff and Markdown diff).</Description>
+    <PackageTags>Cake, Script, Build, Mono, API, mono-api-info, mono-api-diff, mono-api-html</PackageTags>
+    <Authors>Matthew Leibowitz</Authors>
+    <PackageProjectUrl>https://github.com/mattleibow/Cake.MonoApiTools</PackageProjectUrl>
+    <PackageIconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/mattleibow/Cake.MonoApiTools/blob/master/README.md</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\externals\tools\**\*" PackagePath="tools" Pack="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cake.Core" Version="0.29.0" />
+    <PackageReference Include="Cake.Common" Version="0.29.0" />
+  </ItemGroup>
+
+</Project>
