@@ -29,12 +29,12 @@ namespace Cake.MonoApiTools
             return "mono-api-diff";
         }
 
-        public void Execute(FilePath firstAssembly, FilePath secondAssembly, FilePath outputPath, MonoApiDiffSettings settings)
+        public void Execute(FilePath firstInfo, FilePath secondInfo, FilePath outputPath, MonoApiDiffSettings settings)
         {
-            if (firstAssembly == null)
-                throw new ArgumentNullException(nameof(firstAssembly));
-            if (secondAssembly == null)
-                throw new ArgumentNullException(nameof(secondAssembly));
+            if (firstInfo == null)
+                throw new ArgumentNullException(nameof(firstInfo));
+            if (secondInfo == null)
+                throw new ArgumentNullException(nameof(secondInfo));
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
 
@@ -42,7 +42,7 @@ namespace Cake.MonoApiTools
 
             var processSettings = new ProcessSettings
             {
-                Arguments = GetArguments(firstAssembly, secondAssembly, outputPath, settings),
+                Arguments = GetArguments(firstInfo, secondInfo, outputPath, settings),
                 RedirectStandardOutput = true
             };
 
@@ -67,13 +67,13 @@ namespace Cake.MonoApiTools
             });
         }
 
-        private ProcessArgumentBuilder GetArguments(FilePath firstAssembly, FilePath secondAssembly, FilePath outputPath, MonoApiDiffSettings settings)
+        private ProcessArgumentBuilder GetArguments(FilePath firstInfo, FilePath secondInfo, FilePath outputPath, MonoApiDiffSettings settings)
         {
             var builder = new ProcessArgumentBuilder();
 
-            builder.AppendQuoted(firstAssembly.MakeAbsolute(environment).FullPath);
+            builder.AppendQuoted(firstInfo.MakeAbsolute(environment).FullPath);
 
-            builder.AppendQuoted(secondAssembly.MakeAbsolute(environment).FullPath);
+            builder.AppendQuoted(secondInfo.MakeAbsolute(environment).FullPath);
 
             return builder;
         }

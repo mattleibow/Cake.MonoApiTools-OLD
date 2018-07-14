@@ -8,14 +8,14 @@ namespace Cake.MonoApiTools.Tests
         public MonoApiDiffFixture()
             : base("mono-api-diff.exe")
         {
-            FirstAssembly = "version-one.dll";
-            SecondAssembly = "version-two.dll";
+            FirstInfo = "version-one.dll";
+            SecondInfo = "version-two.dll";
             OutputPath = "diff.xml";
         }
 
-        public FilePath FirstAssembly { get; set; }
+        public FilePath FirstInfo { get; set; }
 
-        public FilePath SecondAssembly { get; set; }
+        public FilePath SecondInfo { get; set; }
 
         public FilePath OutputPath { get; set; }
 
@@ -23,7 +23,7 @@ namespace Cake.MonoApiTools.Tests
         {
             var tool = new MonoApiDiffTool(FileSystem, Environment, ProcessRunner, Tools);
 
-            tool.Execute(FirstAssembly, SecondAssembly, OutputPath, Settings);
+            tool.Execute(FirstInfo, SecondInfo, OutputPath, Settings);
         }
     }
 }

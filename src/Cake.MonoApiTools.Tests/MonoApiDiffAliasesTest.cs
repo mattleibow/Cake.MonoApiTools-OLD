@@ -29,10 +29,10 @@ namespace Cake.MonoApiTools.Tests
         {
             // Given
             var fixture = new MonoApiDiffFixture();
-            fixture.FirstAssembly = null;
+            fixture.FirstInfo = null;
 
             // When + Then
-            var result = Assert.Throws<ArgumentNullException>("firstAssembly", () => fixture.Run());
+            var result = Assert.Throws<ArgumentNullException>("firstInfo", () => fixture.Run());
         }
 
         [Fact]
@@ -40,10 +40,10 @@ namespace Cake.MonoApiTools.Tests
         {
             // Given
             var fixture = new MonoApiDiffFixture();
-            fixture.SecondAssembly = null;
+            fixture.SecondInfo = null;
 
             // When + Then
-            var result = Assert.Throws<ArgumentNullException>("secondAssembly", () => fixture.Run());
+            var result = Assert.Throws<ArgumentNullException>("secondInfo", () => fixture.Run());
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace Cake.MonoApiTools.Tests
 
         [Fact]
 
-        public void Should_Throw_When_Only_Assembly_Paths()
+        public void Should_Throw_When_Only_Info_Paths()
         {
             // Given
             var fixture = new MonoApiDiffFixture();
@@ -72,7 +72,7 @@ namespace Cake.MonoApiTools.Tests
         }
 
         [Fact]
-        public void Should_Create_Correct_Command_Line_Arguments_For_Assembly_And_Output()
+        public void Should_Create_Correct_Command_Line_Arguments_For_Info_And_Output()
         {
             // Given
             var fixture = new MonoApiDiffFixture();

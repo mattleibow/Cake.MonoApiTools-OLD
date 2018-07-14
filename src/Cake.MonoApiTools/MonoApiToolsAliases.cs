@@ -48,23 +48,23 @@ namespace Cake.MonoApiTools
         }
 
         [CakeMethodAlias]
-        public static void MonoApiDiff(this ICakeContext context, FilePath firstAssembly, FilePath secondAssembly, FilePath outputFile)
+        public static void MonoApiDiff(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile)
         {
-            MonoApiDiff(context, firstAssembly, secondAssembly, outputFile, null);
+            MonoApiDiff(context, firstInfo, secondInfo, outputFile, null);
         }
 
         [CakeMethodAlias]
-        public static void MonoApiDiff(this ICakeContext context, FilePath firstAssembly, FilePath secondAssembly, FilePath outputFile, MonoApiDiffSettings settings)
+        public static void MonoApiDiff(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile, MonoApiDiffSettings settings)
         {
-            if (firstAssembly == null)
-                throw new ArgumentNullException(nameof(firstAssembly));
-            if (secondAssembly == null)
-                throw new ArgumentNullException(nameof(secondAssembly));
+            if (firstInfo == null)
+                throw new ArgumentNullException(nameof(firstInfo));
+            if (secondInfo == null)
+                throw new ArgumentNullException(nameof(secondInfo));
             if (outputFile == null)
                 throw new ArgumentNullException(nameof(outputFile));
 
             var tool = new MonoApiDiffTool(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            tool.Execute(firstAssembly, secondAssembly, outputFile, settings);
+            tool.Execute(firstInfo, secondInfo, outputFile, settings);
         }
     }
 }
