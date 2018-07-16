@@ -13,10 +13,12 @@ var configuration = Argument("configuration", "Release");
 //  - input                     = 1.2.3.4
 //  - package version           = 1.2.3
 //  - preview package version   = 1.2.3-preview4
-var version = Argument("packageversion", EnvironmentVariable("APPVEYOR_BUILD_VERSION") ?? "1.0.0.0");
-var parsedVersion = Version.Parse(version);
-var previewNumber = parsedVersion.Revision;
-version = $"{parsedVersion.Major}.{parsedVersion.Minor}.{parsedVersion.Build}";
+var version = Version.Parse(Argument("packageversion", EnvironmentVariable("APPVEYOR_BUILD_VERSION") ?? "1.0.0.0"));
+var previewNumber   = version.Revision;
+var assemblyVersion = $"{version.Major}.0.0.0";
+var fileVersion     = $"{version.Major}.{version.Minor}.{version.Build}.0";
+var infoVersion     = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+var packageVersion  = $"{version.Major}.{version.Minor}.{version.Build}";
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -53,6 +55,9 @@ Task("Build")
         .WithRestore()
         .WithProperty("NoWarn", "1591") // ignore missing XML doc warnings
         .WithProperty("TreatWarningsAsErrors", "True")
+        .WithProperty("Version", assemblyVersion)
+        .WithProperty("FileVersion", fileVersion)
+        .WithProperty("InformationalVersion", infoVersion)
         .SetVerbosity(Verbosity.Minimal)
         .SetNodeReuse(false);
 
@@ -89,11 +94,14 @@ Task("Package")
         .SetConfiguration(configuration)
         .WithTarget("Pack")
         .WithProperty("IncludeSymbols", "True")
-        .WithProperty("PackageVersion", version)
+        .WithProperty("PackageVersion", packageVersion)
+        .WithProperty("Version", assemblyVersion)
+        .WithProperty("FileVersion", fileVersion)
+        .WithProperty("InformationalVersion", infoVersion)
         .WithProperty("PackageOutputPath", MakeAbsolute((DirectoryPath)"./output/").FullPath);
     MSBuild (proj, settings);
 
-    settings.WithProperty("PackageVersion", version + "-preview" + previewNumber);
+    settings.WithProperty("PackageVersion", packageVersion + "-preview" + previewNumber);
     MSBuild (proj, settings);
 
     Information("Pack complete.");
