@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright (c) 2018 Matthew Leibowitz <mattleibow@live.com>
+Copyright (c) 2018 Matthew Leibowitz
 Copyright (c) 2018 Jonathan Dick
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
