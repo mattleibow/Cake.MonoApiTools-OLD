@@ -10,7 +10,7 @@
     <Title>Cake.MonoApiTools</Title>
     <Description>Cake Build addin to provide aliases for using the Mono API Tools (info, diff, HTML diff and Markdown diff).</Description>
     <PackageTags>Cake, Script, Build, Mono, API, mono-api-info, mono-api-diff, mono-api-html</PackageTags>
-    <Authors>Matthew Leibowitz</Authors>
+    <Authors>Matthew Leibowitz (mattleibow), Jonathan Dick (redth)</Authors>
     <PackageProjectUrl>https://github.com/mattleibow/Cake.MonoApiTools</PackageProjectUrl>
     <PackageIconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/mattleibow/Cake.MonoApiTools/blob/master/README.md</PackageLicenseUrl>
