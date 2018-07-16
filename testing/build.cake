@@ -1,19 +1,22 @@
-#addin nuget:https://ci.appveyor.com/nuget/cake-monoapitools-ilf7s9bl0p9d/?package=Cake.MonoApiTools&version=1.0.0-preview11
+#addin nuget:https://ci.appveyor.com/nuget/cake-monoapitools-ilf7s9bl0p9d/?package=Cake.MonoApiTools&version=1.0.0-preview14
 
 var target = Argument("target", "Default");
 
-var oldPackage = "https://ci.appveyor.com/api/buildjobs/7eahjee0x1tshgt1/artifacts/output%2FCake.MonoApiTools.0.0.0.1-preview5.nupkg";
-var newPackage = "https://ci.appveyor.com/api/buildjobs/tib6m038i3ncjeih/artifacts/output%2FCake.MonoApiTools.1.0.0-preview11.nupkg";
+var oldPackage = "https://www.nuget.org/api/v2/package/Cake.MonoApiTools/2.0.0";
+var newPackage = "https://ci.appveyor.com/api/buildjobs/fifd953vgy0ufw98/artifacts/output%2FCake.MonoApiTools.1.0.0-preview14.nupkg";
 
 Task("Default")
     .Does (() =>
 {
     EnsureDirectoryExists("output");
 
+    Information("Downloading old.nupkg...");
     if (!FileExists("output/old.nupkg")) {
         DownloadFile(oldPackage, "output/old.nupkg");
         Unzip("output/old.nupkg", "output/old");
     }
+
+    Information("Downloading new.nupkg...");
     if (!FileExists("output/new.nupkg")) {
         DownloadFile(newPackage, "output/new.nupkg");
         Unzip("output/new.nupkg", "output/new");
@@ -23,11 +26,11 @@ Task("Default")
     MonoApiInfo(
         "./output/old/lib/netstandard2.0/Cake.MonoApiTools.dll",
         "./output/old-info.xml",
-        new MonoApiInfoSettings { SearchPaths = new [] { (DirectoryPath)"./tools/Cake" } });
+        new MonoApiInfoToolSettings { SearchPaths = new [] { (DirectoryPath)"./tools/Cake" } });
     MonoApiInfo(
         "./output/new/lib/netstandard2.0/Cake.MonoApiTools.dll",
         "./output/new-info.xml",
-        new MonoApiInfoSettings { SearchPaths = new [] { (DirectoryPath)"./tools/Cake" } });
+        new MonoApiInfoToolSettings { SearchPaths = new [] { (DirectoryPath)"./tools/Cake" } });
 
     Information("Running mono-api-diff...");
     MonoApiDiff("./output/old-info.xml", "./output/new-info.xml", "./output/diff.xml");
