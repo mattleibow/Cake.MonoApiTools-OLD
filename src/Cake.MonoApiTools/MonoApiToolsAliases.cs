@@ -8,11 +8,17 @@ namespace Cake.MonoApiTools
     /// <summary>
     /// Contains functionality to work with the Mono API Tools.
     /// </summary>
-    [CakeAliasCategory("MonoApiTools")]
+    [CakeAliasCategory("Mono API Tools")]
     public static class MonoApiToolsAliases
     {
         // MonoApiInfo
 
+        /// <summary>
+        /// Runs mono-api-info.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="assembly">The .NET assembly to generate API info xml from.</param>
+        /// <param name="outputFile">The API Info xml output file.</param>
         [CakeMethodAlias]
         public static void MonoApiInfo(this ICakeContext context, FilePath assembly, FilePath outputFile)
         {
@@ -22,6 +28,13 @@ namespace Cake.MonoApiTools
             MonoApiInfo(context, new[] { assembly }, outputFile, null);
         }
 
+        /// <summary>
+        /// Runs mono-api-info.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="assembly">The .NET assembly to generate API info xml from.</param>
+        /// <param name="outputFile">The API Info xml output file.</param>
+        /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
         public static void MonoApiInfo(this ICakeContext context, FilePath assembly, FilePath outputFile, MonoApiInfoSettings settings)
         {
@@ -31,12 +44,25 @@ namespace Cake.MonoApiTools
             MonoApiInfo(context, new[] { assembly }, outputFile, settings);
         }
 
+        /// <summary>
+        /// Runs mono-api-info.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="assemblies">The .NET assemblies to generate API info xml from.</param>
+        /// <param name="outputFile">The API Info xml output file.</param>
         [CakeMethodAlias]
         public static void MonoApiInfo(this ICakeContext context, FilePath[] assemblies, FilePath outputFile)
         {
             MonoApiInfo(context, assemblies, outputFile, null);
         }
 
+        /// <summary>
+        /// Runs mono-api-info.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="assemblies">The .NET assemblies to generate API info xml from.</param>
+        /// <param name="outputFile">The API Info xml output file.</param>
+        /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
         public static void MonoApiInfo(this ICakeContext context, FilePath[] assemblies, FilePath outputFile, MonoApiInfoSettings settings)
         {
@@ -52,71 +78,122 @@ namespace Cake.MonoApiTools
 
         // MonoApiDiff
 
+        /// <summary>
+        /// Runs mono-api-diff to generate an XML diff.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="previousApiInfoFile">The first API-Info xml file to compare.</param>
+        /// <param name="newApiInfoFile">The second API Info xml file to compare.</param>
+        /// <param name="outputFile">The API Info xml output file.</param>
         [CakeMethodAlias]
-        public static void MonoApiDiff(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile)
+        public static void MonoApiDiff(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiDiff(context, firstInfo, secondInfo, outputFile, null);
+            MonoApiDiff(context, previousApiInfoFile, newApiInfoFile, outputFile, null);
         }
 
+        /// <summary>
+        /// Runs mono-api-diff to generate an XML diff.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="previousApiInfoFile">The first API-Info xml file to compare.</param>
+        /// <param name="newApiInfoFile">The second API Info xml file to compare.</param>
+        /// <param name="outputFile">The API Info xml output file.</param>
+        /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
-        public static void MonoApiDiff(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile, MonoApiDiffSettings settings)
+        public static void MonoApiDiff(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile, MonoApiDiffSettings settings)
         {
-            if (firstInfo == null)
-                throw new ArgumentNullException(nameof(firstInfo));
-            if (secondInfo == null)
-                throw new ArgumentNullException(nameof(secondInfo));
+            if (previousApiInfoFile == null)
+                throw new ArgumentNullException(nameof(previousApiInfoFile));
+            if (newApiInfoFile == null)
+                throw new ArgumentNullException(nameof(newApiInfoFile));
             if (outputFile == null)
                 throw new ArgumentNullException(nameof(outputFile));
 
             var tool = new MonoApiDiffTool(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            tool.Execute(firstInfo, secondInfo, outputFile, settings);
+            tool.Execute(previousApiInfoFile, newApiInfoFile, outputFile, settings);
         }
 
 
         // MonoApiHtml
 
+        /// <summary>
+        /// Runs mono-api-html to generate an HTML diff.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="previousApiInfoFile">The first API-Info xml file to compare.</param>
+        /// <param name="newApiInfoFile">The second API Info xml file to compare.</param>
+        /// <param name="outputFile">The API Diff Html output file.</param>
         [CakeMethodAlias]
-        public static void MonoApiHtml(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile)
+        public static void MonoApiHtml(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiHtml(context, firstInfo, secondInfo, outputFile, null);
+            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, null);
         }
 
+        /// <summary>
+        /// Runs mono-api-html to generate an HTML diff.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="previousApiInfoFile">The first API-Info xml file to compare.</param>
+        /// <param name="newApiInfoFile">The second API Info xml file to compare.</param>
+        /// <param name="outputFile">The API Diff Html output file.</param>
+        /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
-        public static void MonoApiHtml(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile, MonoApiHtmlSettings settings)
+        public static void MonoApiHtml(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile, MonoApiHtmlSettings settings)
         {
-            if (firstInfo == null)
-                throw new ArgumentNullException(nameof(firstInfo));
-            if (secondInfo == null)
-                throw new ArgumentNullException(nameof(secondInfo));
+            if (previousApiInfoFile == null)
+                throw new ArgumentNullException(nameof(previousApiInfoFile));
+            if (newApiInfoFile == null)
+                throw new ArgumentNullException(nameof(newApiInfoFile));
             if (outputFile == null)
                 throw new ArgumentNullException(nameof(outputFile));
 
             var tool = new MonoApiHtmlTool(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            tool.Execute(firstInfo, secondInfo, outputFile, settings);
+            tool.Execute(previousApiInfoFile, newApiInfoFile, outputFile, settings);
         }
 
+        /// <summary>
+        /// Runs mono-api-html to generate an colorized HTML diff.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="previousApiInfoFile">The first API-Info xml file to compare.</param>
+        /// <param name="newApiInfoFile">The second API Info xml file to compare.</param>
+        /// <param name="outputFile">The API Diff Html output file.</param>
         [CakeMethodAlias]
-        public static void MonoApiHtmlColorized(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile)
+        public static void MonoApiHtmlColorized(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiHtml(context, firstInfo, secondInfo, outputFile, new MonoApiHtmlSettings
+            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlSettings
             {
                 Colorize = true
             });
         }
 
+        /// <summary>
+        /// Runs mono-api-html to generate an Markdown diff.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="previousApiInfoFile">The first API-Info xml file to compare.</param>
+        /// <param name="newApiInfoFile">The second API Info xml file to compare.</param>
+        /// <param name="outputFile">The API Diff Html output file.</param>
         [CakeMethodAlias]
-        public static void MonoApiMarkdown(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile)
+        public static void MonoApiMarkdown(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiHtml(context, firstInfo, secondInfo, outputFile, new MonoApiHtmlSettings
+            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlSettings
             {
                 OutputFormat = MonoApiHtmlOutputFormat.Markdown
             });
         }
 
+        /// <summary>
+        /// Runs mono-api-html to generate an colorized Markdown diff.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="previousApiInfoFile">The first API-Info xml file to compare.</param>
+        /// <param name="newApiInfoFile">The second API Info xml file to compare.</param>
+        /// <param name="outputFile">The API Diff Html output file.</param>
         [CakeMethodAlias]
-        public static void MonoApiMarkdownColorized(this ICakeContext context, FilePath firstInfo, FilePath secondInfo, FilePath outputFile)
+        public static void MonoApiMarkdownColorized(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiHtml(context, firstInfo, secondInfo, outputFile, new MonoApiHtmlSettings
+            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlSettings
             {
                 Colorize = true,
                 OutputFormat = MonoApiHtmlOutputFormat.Markdown

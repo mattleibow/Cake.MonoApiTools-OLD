@@ -2,12 +2,25 @@
 
 namespace Cake.MonoApiTools
 {
+    /// <summary>
+    /// Various output formats for mono-api-html
+    /// </summary>
     public enum MonoApiHtmlOutputFormat
     {
+        /// <summary>
+        /// Outputs HTML.
+        /// </summary>
         Html,
+
+        /// <summary>
+        /// Outputs Markdown.
+        /// </summary>
         Markdown
     }
 
+    /// <summary>
+    /// Tool settings for mono-api-html.
+    /// </summary>
     public class MonoApiHtmlSettings : ToolSettings
     {
         public string[] Ignore { get; set; }
@@ -28,10 +41,19 @@ namespace Cake.MonoApiTools
 
         public bool IgnoreDuplicateXml { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the output should be colorized.
+        /// </summary>
         public bool Colorize { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to log additional information.
+        /// </summary>
         public bool Verbose { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating what the format of the output file should be.
+        /// </summary>
         public MonoApiHtmlOutputFormat OutputFormat { get; set; }
     }
 }

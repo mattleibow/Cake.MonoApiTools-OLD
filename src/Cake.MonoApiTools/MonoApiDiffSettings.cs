@@ -1,8 +1,10 @@
-﻿using Cake.Core.IO;
-using Cake.Core.Tooling;
+﻿using Cake.Core.Tooling;
 
 namespace Cake.MonoApiTools
 {
+    /// <summary>
+    /// Tool settings for mono-api-diff.
+    /// </summary>
     public class MonoApiDiffSettings : ToolSettings
     {
     }
