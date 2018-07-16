@@ -1,5 +1,4 @@
-﻿using Cake.Core.IO;
-using Cake.Testing;
+﻿using Cake.Testing;
 using System;
 using Xunit;
 
@@ -82,9 +81,9 @@ namespace Cake.MonoApiTools.Tests
 
             // Then
             var args =
-                "\"/Working/version-one.dll\" " +
-                "\"/Working/version-two.dll\" " +
-                "\"/Working/diff.xml\"";
+                "--output=\"/Working/diff.xml\" " +
+                "\"/Working/version-one.xml\" " +
+                "\"/Working/version-two.xml\"";
             Assert.Equal(args, result.Args);
         }
     }

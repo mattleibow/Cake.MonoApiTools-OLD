@@ -20,7 +20,7 @@ Task("Externals")
 {
     Information("Downloading the mono-api-tools package...");
 
-    var url = "https://xamjenkinsartifact.blob.core.windows.net/components-opensource-pr-public-artifacts/ArtifactsFor-31/ab23e6575207a4726f2932f89247f4ede8b07023/XPlat/Mono.ApiTools/output/signed/Mono.ApiTools.5.12.0.273.nupkg";
+    var url = "https://jenkins.mono-project.com/job/Components-OpenSource-PR/35/Azure/processDownloadRequest/ArtifactsFor-35/a27ca016cfba97352e948ceaf48badccf96cbc9f/XPlat/Mono.ApiTools/output/Mono.ApiTools.5.12.0.273-preview.nupkg";
     var dest = "./externals/Mono.ApiTools.nupkg";
 
     if (!FileExists(dest)) {

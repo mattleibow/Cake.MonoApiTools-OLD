@@ -8,8 +8,8 @@ namespace Cake.MonoApiTools.Tests
         public MonoApiDiffFixture()
             : base("mono-api-diff.exe")
         {
-            FirstInfo = "version-one.dll";
-            SecondInfo = "version-two.dll";
+            FirstInfo = "version-one.xml";
+            SecondInfo = "version-two.xml";
             OutputPath = "diff.xml";
         }
 
