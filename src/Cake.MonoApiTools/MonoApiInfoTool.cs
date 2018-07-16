@@ -50,7 +50,7 @@ namespace Cake.MonoApiTools
             if (settings.FollowForwarders)
                 builder.Append("--follow-forwarders");
 
-            if (settings.SearchPaths != null)
+            if (settings.SearchPaths?.Length > 0)
             {
                 foreach (var path in settings.SearchPaths)
                 {
@@ -58,7 +58,7 @@ namespace Cake.MonoApiTools
                 }
             }
 
-            if (settings.ResolvePaths != null)
+            if (settings.ResolvePaths?.Length > 0)
             {
                 foreach (var path in settings.ResolvePaths)
                 {
