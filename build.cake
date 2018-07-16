@@ -9,7 +9,7 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var version = "0.0.0.1-preview6";
+var version = Argument("packageversion", EnvironmentVariable("APPVEYOR_BUILD_VERSION") ?? "1.0.0");
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -84,7 +84,9 @@ Task("Package")
         .WithProperty("IncludeSymbols", "True")
         .WithProperty("PackageVersion", version)
         .WithProperty("PackageOutputPath", MakeAbsolute((DirectoryPath)"./output/").FullPath);
+    MSBuild (proj, settings);
 
+    settings.WithProperty("PackageVersion", version + "-preview");
     MSBuild (proj, settings);
 
     Information("Pack complete.");
