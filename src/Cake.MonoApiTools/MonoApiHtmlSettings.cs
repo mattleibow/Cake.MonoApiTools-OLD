@@ -21,7 +21,7 @@ namespace Cake.MonoApiTools
     /// <summary>
     /// Tool settings for mono-api-html.
     /// </summary>
-    public class MonoApiHtmlSettings : ToolSettings
+    public class MonoApiHtmlToolSettings : ToolSettings
     {
         public string[] Ignore { get; set; }
 

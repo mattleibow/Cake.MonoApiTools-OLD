@@ -6,7 +6,7 @@ namespace Cake.MonoApiTools
     /// <summary>
     /// Tool settings for mono-api-info.
     /// </summary>
-    public class MonoApiInfoSettings : ToolSettings
+    public class MonoApiInfoToolSettings : ToolSettings
     {
         public bool GenerateAbi { get; set; }
 

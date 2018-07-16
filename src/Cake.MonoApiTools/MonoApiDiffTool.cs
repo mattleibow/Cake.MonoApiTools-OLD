@@ -6,7 +6,7 @@ using Cake.Core.Tooling;
 
 namespace Cake.MonoApiTools
 {
-    public sealed class MonoApiDiffTool : Tool<MonoApiDiffSettings>
+    public sealed class MonoApiDiffTool : Tool<MonoApiDiffToolSettings>
     {
         private ICakeEnvironment environment;
 
@@ -26,7 +26,7 @@ namespace Cake.MonoApiTools
             return "mono-api-diff";
         }
 
-        public void Execute(FilePath firstInfo, FilePath secondInfo, FilePath outputPath, MonoApiDiffSettings settings)
+        public void Execute(FilePath firstInfo, FilePath secondInfo, FilePath outputPath, MonoApiDiffToolSettings settings)
         {
             if (firstInfo == null)
                 throw new ArgumentNullException(nameof(firstInfo));
@@ -35,12 +35,12 @@ namespace Cake.MonoApiTools
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
 
-            settings = settings ?? new MonoApiDiffSettings();
+            settings = settings ?? new MonoApiDiffToolSettings();
 
             Run(settings, GetArguments(firstInfo, secondInfo, outputPath, settings));
         }
 
-        private ProcessArgumentBuilder GetArguments(FilePath firstInfo, FilePath secondInfo, FilePath outputPath, MonoApiDiffSettings settings)
+        private ProcessArgumentBuilder GetArguments(FilePath firstInfo, FilePath secondInfo, FilePath outputPath, MonoApiDiffToolSettings settings)
         {
             var builder = new ProcessArgumentBuilder();
 

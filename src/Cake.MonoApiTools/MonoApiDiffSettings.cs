@@ -5,7 +5,7 @@ namespace Cake.MonoApiTools
     /// <summary>
     /// Tool settings for mono-api-diff.
     /// </summary>
-    public class MonoApiDiffSettings : ToolSettings
+    public class MonoApiDiffToolSettings : ToolSettings
     {
     }
 }

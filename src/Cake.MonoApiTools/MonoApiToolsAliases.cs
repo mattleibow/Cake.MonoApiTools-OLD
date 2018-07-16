@@ -17,31 +17,31 @@ namespace Cake.MonoApiTools
         /// Runs mono-api-info.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="assembly">The .NET assembly to generate API info xml from.</param>
+        /// <param name="dotNetAssembly">The .NET assembly to generate API info xml from.</param>
         /// <param name="outputFile">The API Info xml output file.</param>
         [CakeMethodAlias]
-        public static void MonoApiInfo(this ICakeContext context, FilePath assembly, FilePath outputFile)
+        public static void MonoApiInfo(this ICakeContext context, FilePath dotNetAssembly, FilePath outputFile)
         {
-            if (assembly == null)
-                throw new ArgumentNullException(nameof(assembly));
+            if (dotNetAssembly == null)
+                throw new ArgumentNullException(nameof(dotNetAssembly));
 
-            MonoApiInfo(context, new[] { assembly }, outputFile, null);
+            MonoApiInfo(context, new[] { dotNetAssembly }, outputFile, null);
         }
 
         /// <summary>
         /// Runs mono-api-info.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="assembly">The .NET assembly to generate API info xml from.</param>
+        /// <param name="dotNetAssembly">The .NET assembly to generate API info xml from.</param>
         /// <param name="outputFile">The API Info xml output file.</param>
         /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
-        public static void MonoApiInfo(this ICakeContext context, FilePath assembly, FilePath outputFile, MonoApiInfoSettings settings)
+        public static void MonoApiInfo(this ICakeContext context, FilePath dotNetAssembly, FilePath outputFile, MonoApiInfoToolSettings settings)
         {
-            if (assembly == null)
-                throw new ArgumentNullException(nameof(assembly));
+            if (dotNetAssembly == null)
+                throw new ArgumentNullException(nameof(dotNetAssembly));
 
-            MonoApiInfo(context, new[] { assembly }, outputFile, settings);
+            MonoApiInfo(context, new[] { dotNetAssembly }, outputFile, settings);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Cake.MonoApiTools
         /// <param name="outputFile">The API Info xml output file.</param>
         /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
-        public static void MonoApiInfo(this ICakeContext context, FilePath[] assemblies, FilePath outputFile, MonoApiInfoSettings settings)
+        public static void MonoApiInfo(this ICakeContext context, FilePath[] assemblies, FilePath outputFile, MonoApiInfoToolSettings settings)
         {
             if (assemblies == null)
                 throw new ArgumentNullException(nameof(assemblies));
@@ -100,7 +100,7 @@ namespace Cake.MonoApiTools
         /// <param name="outputFile">The API Info xml output file.</param>
         /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
-        public static void MonoApiDiff(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile, MonoApiDiffSettings settings)
+        public static void MonoApiDiff(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile, MonoApiDiffToolSettings settings)
         {
             if (previousApiInfoFile == null)
                 throw new ArgumentNullException(nameof(previousApiInfoFile));
@@ -138,7 +138,7 @@ namespace Cake.MonoApiTools
         /// <param name="outputFile">The API Diff Html output file.</param>
         /// <param name="settings">The tool settings.</param>
         [CakeMethodAlias]
-        public static void MonoApiHtml(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile, MonoApiHtmlSettings settings)
+        public static void MonoApiHtml(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile, MonoApiHtmlToolSettings settings)
         {
             if (previousApiInfoFile == null)
                 throw new ArgumentNullException(nameof(previousApiInfoFile));
@@ -161,7 +161,7 @@ namespace Cake.MonoApiTools
         [CakeMethodAlias]
         public static void MonoApiHtmlColorized(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlSettings
+            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlToolSettings
             {
                 Colorize = true
             });
@@ -177,7 +177,7 @@ namespace Cake.MonoApiTools
         [CakeMethodAlias]
         public static void MonoApiMarkdown(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlSettings
+            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlToolSettings
             {
                 OutputFormat = MonoApiHtmlOutputFormat.Markdown
             });
@@ -193,7 +193,7 @@ namespace Cake.MonoApiTools
         [CakeMethodAlias]
         public static void MonoApiMarkdownColorized(this ICakeContext context, FilePath previousApiInfoFile, FilePath newApiInfoFile, FilePath outputFile)
         {
-            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlSettings
+            MonoApiHtml(context, previousApiInfoFile, newApiInfoFile, outputFile, new MonoApiHtmlToolSettings
             {
                 Colorize = true,
                 OutputFormat = MonoApiHtmlOutputFormat.Markdown

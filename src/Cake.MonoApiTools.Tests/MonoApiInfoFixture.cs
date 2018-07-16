@@ -3,7 +3,7 @@ using Cake.Testing.Fixtures;
 
 namespace Cake.MonoApiTools.Tests
 {
-    internal sealed class MonoApiInfoFixture : ToolFixture<MonoApiInfoSettings>
+    internal sealed class MonoApiInfoFixture : ToolFixture<MonoApiInfoToolSettings>
     {
         public MonoApiInfoFixture()
             : base("mono-api-info.exe")

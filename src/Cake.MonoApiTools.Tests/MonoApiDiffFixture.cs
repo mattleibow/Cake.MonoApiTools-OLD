@@ -3,7 +3,7 @@ using Cake.Testing.Fixtures;
 
 namespace Cake.MonoApiTools.Tests
 {
-    internal sealed class MonoApiDiffFixture : ToolFixture<MonoApiDiffSettings>
+    internal sealed class MonoApiDiffFixture : ToolFixture<MonoApiDiffToolSettings>
     {
         public MonoApiDiffFixture()
             : base("mono-api-diff.exe")

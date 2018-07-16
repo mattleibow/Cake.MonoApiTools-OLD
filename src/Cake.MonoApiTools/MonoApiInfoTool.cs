@@ -6,7 +6,7 @@ using Cake.Core.Tooling;
 
 namespace Cake.MonoApiTools
 {
-    public sealed class MonoApiInfoTool : Tool<MonoApiInfoSettings>
+    public sealed class MonoApiInfoTool : Tool<MonoApiInfoToolSettings>
     {
         private ICakeEnvironment environment;
 
@@ -26,7 +26,7 @@ namespace Cake.MonoApiTools
             return "mono-api-info";
         }
 
-        public void Execute(FilePath[] assemblies, FilePath outputPath, MonoApiInfoSettings settings)
+        public void Execute(FilePath[] assemblies, FilePath outputPath, MonoApiInfoToolSettings settings)
         {
             if (assemblies == null)
                 throw new ArgumentNullException(nameof(assemblies));
@@ -35,12 +35,12 @@ namespace Cake.MonoApiTools
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
 
-            settings = settings ?? new MonoApiInfoSettings();
+            settings = settings ?? new MonoApiInfoToolSettings();
 
             Run(settings, GetArguments(assemblies, outputPath, settings));
         }
 
-        private ProcessArgumentBuilder GetArguments(FilePath[] assemblies, FilePath outputPath, MonoApiInfoSettings settings)
+        private ProcessArgumentBuilder GetArguments(FilePath[] assemblies, FilePath outputPath, MonoApiInfoToolSettings settings)
         {
             var builder = new ProcessArgumentBuilder();
 
