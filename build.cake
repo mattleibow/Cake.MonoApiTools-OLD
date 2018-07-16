@@ -9,7 +9,14 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var version = Argument("packageversion", EnvironmentVariable("APPVEYOR_BUILD_VERSION") ?? "1.0.0");
+// a bit of logic to create the version number:
+//  - input                     = 1.2.3.4
+//  - package version           = 1.2.3
+//  - preview package version   = 1.2.3-preview4
+var version = Argument("packageversion", EnvironmentVariable("APPVEYOR_BUILD_VERSION") ?? "1.0.0.0");
+var parsedVersion = Version.Parse(version);
+var previewNumber = parsedVersion.Revision;
+version = $"{parsedVersion.Major}.{parsedVersion.Minor}.{parsedVersion.Build}";
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -86,7 +93,7 @@ Task("Package")
         .WithProperty("PackageOutputPath", MakeAbsolute((DirectoryPath)"./output/").FullPath);
     MSBuild (proj, settings);
 
-    settings.WithProperty("PackageVersion", version + "-preview");
+    settings.WithProperty("PackageVersion", version + "-preview" + previewNumber);
     MSBuild (proj, settings);
 
     Information("Pack complete.");
